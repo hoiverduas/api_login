@@ -80,9 +80,74 @@ curl -X GET http://localhost:8080/api/v1/auth/me
 GET /api/v1/auth/users
 Retorna todos los usuarios disponibles en DummyJSON (para pruebas de login).
 
-
 🧪 Curl
 bash
 Copiar
 Editar
 curl -X GET http://localhost:8080/api/v1/auth/users
+
+
+Instrucciones de ejecución
+Clonar el repositorio:
+
+bash
+Copiar
+Editar
+git clone https://github.com/hoiverduas/api_login.git
+cd api_login
+Configura tu base de datos PostgreSQL en src/main/resources/application.properties:
+
+properties
+
+agegar credenciales y crear tu base de datos 
+Copiar
+Editar
+spring.datasource.url=jdbc:postgresql://localhost:5432/api_login
+spring.datasource.username=postgres
+spring.datasource.password=tu_password
+Ejecuta la aplicación:
+
+bash
+Copiar
+Editar
+./mvnw spring-boot:run
+
+
+
+
+Registro de login
+
+Al autenticarse correctamente, la aplicación:
+
+Guarda en la tabla login_log los siguientes campos:
+
+id (autogenerado)
+
+username
+
+access_token
+
+refresh_token
+
+login_time (timestamp actual)
+
+Esto se realiza automáticamente en el método login() del servicio AuthService.
+
+🧪 Autenticación por token (Postman)
+Para usar el token en Postman:
+
+Llama a /api/v1/auth/login para obtener accessToken.
+
+Luego usa el token así:
+
+makefile
+Copiar
+Editar
+Authorization:  <accessToken>
+en las peticiones a /me o cualquier otro endpoint protegido.
+
+👨‍💻 Autor
+Hoiver Valencia
+GitHub: @hoiverduas
+
+
