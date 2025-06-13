@@ -17,17 +17,19 @@ Gradele
 
 📦 Endpoints Disponibles
 🔐 1. Autenticación de Usuario
-POST /api/v1/auth/login
+POST  http://localhost:8080/api/v1/auth/login
 Autentica un usuario contra DummyJSON y guarda el registro en la base de datos.
 
 🧾 Ejemplo de Request
 json
 Copiar
 Editar
+
 {
   "username": "emilys",
   "password": "emilyspass"
 }
+
 🧪 Curl
 bash
 Copiar
@@ -35,6 +37,7 @@ Editar
 curl -X POST http://localhost:8080/api/v1/auth/login \
   -H "Content-Type: application/json" \
   -d '{"username": "emilys", "password": "emilyspass"}'
+  
 ✅ Ejemplo de Response
 json
 Copiar
@@ -46,26 +49,37 @@ Editar
   "accessToken": "eyJhbGciOiJIUzI1NiIsInR5...",
   "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5..."
 }
+
+
 👤 2. Obtener Usuario Autenticado
-GET /api/v1/auth/me
+GET  http://localhost:8080/api/v1/auth/me
 Obtiene la información del usuario autenticado.
+
+agrega  desde postman en headers
+
+Key: Authorization
+Value: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
 
 🔐 Header
 makefile
 Copiar
 Editar
 Authorization: accessToken
+
 🧪 Curl
 bash
 Copiar
 Editar
-curl -X GET http://localhost:8080/api/v1/auth/me \
-  -H "Authorization: Bearer <accessToken>"
+curl -X GET http://localhost:8080/api/v1/auth/me
+  -H "Authorization: <accessToken>"
+
+
+  
 📋 3. Obtener Lista de Usuarios de Prueba
+
 GET /api/v1/auth/users
 Retorna todos los usuarios disponibles en DummyJSON (para pruebas de login).
-Key: Authorization
-Value: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+
 
 🧪 Curl
 bash
